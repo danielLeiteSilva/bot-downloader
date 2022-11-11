@@ -2,10 +2,10 @@ const path = require('path')
 const fs = require('fs');
 const ytdl = require('ytdl-core');
 
-async function downloadVideoYoutube(url) {
+async function downloadAudioYoutube(url) {
   try {
     await downloadFile(url)
-    return path.join(__dirname, "..", "videos", "youtube.mp4")
+    return path.join(__dirname, "..", "audio", "audio.mp3")
 
   } catch (error) {
     console.log(error)
@@ -15,15 +15,15 @@ async function downloadVideoYoutube(url) {
 
 function downloadFile(url) {
 
-  let pathFile = path.join(__dirname, "..", "videos", "youtube.mp4")
+  let pathFile = path.join(__dirname, "..", "audio", "audio.mp3")
 
   return new Promise(async resolve => {
-    ytdl(url, { filter: 'videoandaudio' })
+    ytdl(url, { filter: 'audioonly' })
       .pipe(fs.createWriteStream(pathFile))
       .on("finish", () => resolve(true))
   })
 }
 
 module.exports = {
-  downloadVideoYoutube
+  downloadAudioYoutube
 }
