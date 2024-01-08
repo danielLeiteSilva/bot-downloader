@@ -15,6 +15,7 @@ async function start() {
         try {
 
             const host = hostNameVideoApp(ctx.message.text)
+            await ctx.telegram.sendMessage(ctx.message.chat.id, `HOST: ${host}`);
             await decisionDownloadVideo(host, ctx)
 
         } catch (error) {
@@ -35,12 +36,14 @@ async function decisionDownloadVideo(host, ctx) {
         "twitter": async function () {
             await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Recebemos sua solicitação. Aguarde alguns minutos para receber seu vídeo... 💻`);
             let path = await twitter.downloadVideoTwitter(ctx.message.text);
+            await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Finalizado com sucesso!!! 💻`);
             await ctx.replyWithVideo({ source: path });
 
         },
         "instagram": async function () {
             await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Recebemos sua solicitação. Aguarde alguns minutos para receber seu vídeo... 💻`);
             let path = await instagram.downloadVideoInstagram(ctx.message.text);
+            await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Finalizado com sucesso!!! 💻`);
             await ctx.replyWithVideo({ source: path });
         },
         "youtube": async function () {
@@ -54,12 +57,14 @@ async function decisionDownloadVideo(host, ctx) {
                 } else {
                     await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Recebemos sua solicitação. Aguarde alguns minutos para receber seu vídeo... 💻`);
                     let path = await youtube.downloadVideoYoutube(mp3[0]);
+                    await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Finalizado com sucesso!!! 💻`);
                     await ctx.replyWithVideo({ source: path });
                 }
             } else {
                 if (mp3[0].toLowerCase() === "mp3") {
                     await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Recebemos sua solicitação. Aguarde alguns minutos para receber seu Áudio... 💻`);
                     let path = await audio.downloadAudioYoutube(mp3[1])
+                    await ctx.telegram.sendMessage(ctx.message.chat.id, `💻 Finalizado com sucesso!!! 💻`);
                     await ctx.replyWithVoice({ source: path });
                 }
             }
