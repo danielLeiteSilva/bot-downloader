@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 //Composition
-const bot = require('./index')
+const bot = require('./server')
 
 const port = process.env.PORT || 8080
 

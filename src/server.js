@@ -6,7 +6,7 @@ const instagram = require('./services/Instagram')
 const youtube = require('./services/Youtube')
 const audio = require('./services/Audio')
 
-const bot = new Telegraf("933198108:AAFChuapeL6Ypig4ZoNWczKlliKROdzqwuo");
+const bot = new Telegraf(process.env.TELEGRAM);
 
 async function start() {
     console.log("🤖 Bot started")
